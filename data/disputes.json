@@ -1,0 +1,137 @@
+{
+  "D-501": {
+    "transaction_id": "T-99812",
+    "merchant_id": "M-1003",
+    "filed_at": "2026-05-20",
+    "reason_code": "product_not_received",
+    "response_due": "2026-05-27",
+    "evidence_submitted": false,
+    "disputed_amount_cents": 85000
+  },
+  "D-502": {
+    "transaction_id": "T-99815",
+    "merchant_id": "M-1001",
+    "filed_at": "2026-05-23",
+    "reason_code": "fraudulent",
+    "response_due": "2026-05-30",
+    "evidence_submitted": false,
+    "disputed_amount_cents": 8500
+  },
+  "D-503": {
+    "transaction_id": "T-99818",
+    "merchant_id": "M-1003",
+    "filed_at": "2026-05-15",
+    "reason_code": "product_unacceptable",
+    "response_due": "2026-05-22",
+    "evidence_submitted": false,
+    "disputed_amount_cents": 120000
+  },
+  "D-504": {
+    "transaction_id": "T-99840",
+    "merchant_id": "M-1011",
+    "filed_at": "2026-05-19",
+    "reason_code": "fraudulent",
+    "response_due": "2026-05-26",
+    "evidence_submitted": false,
+    "disputed_amount_cents": 15800
+  },
+  "D-505": {
+    "transaction_id": "T-99841",
+    "merchant_id": "M-1017",
+    "filed_at": "2026-05-19",
+    "reason_code": "product_not_received",
+    "response_due": "2026-05-26",
+    "evidence_submitted": true,
+    "disputed_amount_cents": 42000
+  },
+  "D-506": {
+    "transaction_id": "T-99842",
+    "merchant_id": "M-1023",
+    "filed_at": "2026-05-20",
+    "reason_code": "duplicate_charge",
+    "response_due": "2026-05-27",
+    "evidence_submitted": false,
+    "disputed_amount_cents": 9900
+  },
+  "D-507": {
+    "transaction_id": "T-99843",
+    "merchant_id": "M-1030",
+    "filed_at": "2026-05-20",
+    "reason_code": "product_unacceptable",
+    "response_due": "2026-05-27",
+    "evidence_submitted": false,
+    "disputed_amount_cents": 61500
+  },
+  "D-508": {
+    "transaction_id": "T-99844",
+    "merchant_id": "M-1019",
+    "filed_at": "2026-05-21",
+    "reason_code": "credit_not_processed",
+    "response_due": "2026-05-28",
+    "evidence_submitted": true,
+    "disputed_amount_cents": 24500
+  },
+  "D-509": {
+    "transaction_id": "T-99845",
+    "merchant_id": "M-1031",
+    "filed_at": "2026-05-21",
+    "reason_code": "fraudulent",
+    "response_due": "2026-05-28",
+    "evidence_submitted": false,
+    "disputed_amount_cents": 18700
+  },
+  "D-510": {
+    "transaction_id": "T-99846",
+    "merchant_id": "M-1012",
+    "filed_at": "2026-05-22",
+    "reason_code": "product_not_received",
+    "response_due": "2026-05-29",
+    "evidence_submitted": false,
+    "disputed_amount_cents": 7600
+  },
+  "D-511": {
+    "transaction_id": "T-99847",
+    "merchant_id": "M-1026",
+    "filed_at": "2026-05-22",
+    "reason_code": "fraudulent",
+    "response_due": "2026-05-29",
+    "evidence_submitted": true,
+    "disputed_amount_cents": 13300
+  },
+  "D-512": {
+    "transaction_id": "T-99848",
+    "merchant_id": "M-1034",
+    "filed_at": "2026-05-23",
+    "reason_code": "product_not_received",
+    "response_due": "2026-05-30",
+    "evidence_submitted": false,
+    "disputed_amount_cents": 245000
+  },
+  "D-513": {
+    "transaction_id": "T-99849",
+    "merchant_id": "M-1009",
+    "filed_at": "2026-05-23",
+    "reason_code": "duplicate_charge",
+    "response_due": "2026-05-30",
+    "evidence_submitted": false,
+    "disputed_amount_cents": 5400
+  },
+  "D-514": {
+    "transaction_id": "T-99850",
+    "merchant_id": "M-1028",
+    "filed_at": "2026-05-24",
+    "reason_code": "product_unacceptable",
+    "response_due": "2026-05-31",
+    "evidence_submitted": true,
+    "disputed_amount_cents": 11100
+  },
+  "D-515": {
+    "transaction_id": "T-99851",
+    "merchant_id": "M-1022",
+    "filed_at": "2026-05-24",
+    "reason_code": "fraudulent",
+    "response_due": "2026-05-31",
+    "evidence_submitted": false,
+    "disputed_amount_cents": 8900
+  }
+}

@@ -1,0 +1,245 @@
+{"timestamp": "2026-04-25T07:34:00Z", "event_type": "transaction_processed", "merchant_id": "M-1008", "transaction_id": "T-99852"}
+{"timestamp": "2026-04-25T09:45:00Z", "event_type": "payout_initiated", "merchant_id": "M-1029", "metadata": {"amount_cents": 84200, "method": "ACH"}}
+{"timestamp": "2026-04-25T11:04:00Z", "event_type": "payout_initiated", "merchant_id": "M-1009", "metadata": {"amount_cents": 55000, "method": "ACH"}}
+{"timestamp": "2026-04-26T07:04:00Z", "event_type": "transaction_processed", "merchant_id": "M-1024", "transaction_id": "T-99977"}
+{"timestamp": "2026-04-26T07:56:00Z", "event_type": "transaction_processed", "merchant_id": "M-1010", "transaction_id": "T-99974"}
+{"timestamp": "2026-04-26T08:12:00Z", "event_type": "transaction_processed", "merchant_id": "M-1009", "transaction_id": "T-99876"}
+{"timestamp": "2026-04-26T08:56:00Z", "event_type": "transaction_processed", "merchant_id": "M-1015", "transaction_id": "T-99897"}
+{"timestamp": "2026-04-26T10:22:00Z", "event_type": "payout_initiated", "merchant_id": "M-1022", "metadata": {"amount_cents": 28500, "method": "ACH"}}
+{"timestamp": "2026-04-27T08:04:00Z", "event_type": "transaction_processed", "merchant_id": "M-1024", "transaction_id": "T-99965"}
+{"timestamp": "2026-04-27T09:50:00Z", "event_type": "payout_initiated", "merchant_id": "M-1010", "metadata": {"amount_cents": 65200, "method": "ACH"}}
+{"timestamp": "2026-04-27T12:35:00Z", "event_type": "transaction_processed", "merchant_id": "M-1011", "transaction_id": "T-99985"}
+{"timestamp": "2026-04-27T15:09:00Z", "event_type": "transaction_processed", "merchant_id": "M-1029", "transaction_id": "T-99879"}
+{"timestamp": "2026-04-28T07:56:00Z", "event_type": "transaction_settled", "merchant_id": "M-1009", "transaction_id": "T-99921"}
+{"timestamp": "2026-04-28T09:06:00Z", "event_type": "transaction_processed", "merchant_id": "M-1014", "transaction_id": "T-99889"}
+{"timestamp": "2026-04-28T09:14:00Z", "event_type": "transaction_processed", "merchant_id": "M-1001", "transaction_id": "T-99800"}
+{"timestamp": "2026-04-28T15:11:00Z", "event_type": "transaction_settled", "merchant_id": "M-1015", "transaction_id": "T-99897"}
+{"timestamp": "2026-04-28T16:34:00Z", "event_type": "transaction_settled", "merchant_id": "M-1029", "transaction_id": "T-99853"}
+{"timestamp": "2026-04-28T18:46:00Z", "event_type": "transaction_processed", "merchant_id": "M-1013", "transaction_id": "T-99981"}
+{"timestamp": "2026-04-29T07:04:00Z", "event_type": "payout_initiated", "merchant_id": "M-1022", "metadata": {"amount_cents": 53200, "method": "ACH"}}
+{"timestamp": "2026-04-29T09:45:00Z", "event_type": "transaction_processed", "merchant_id": "M-1020", "transaction_id": "T-99875"}
+{"timestamp": "2026-04-29T12:35:00Z", "event_type": "transaction_processed", "merchant_id": "M-1022", "transaction_id": "T-99862"}
+{"timestamp": "2026-04-29T12:41:00Z", "event_type": "transaction_settled", "merchant_id": "M-1028", "transaction_id": "T-99854"}
+{"timestamp": "2026-04-29T13:04:00Z", "event_type": "transaction_settled", "merchant_id": "M-1035", "transaction_id": "T-99945"}
+{"timestamp": "2026-04-30T08:19:00Z", "event_type": "payout_initiated", "merchant_id": "M-1032", "metadata": {"amount_cents": 42500, "method": "ACH"}}
+{"timestamp": "2026-04-30T09:40:00Z", "event_type": "payout_initiated", "merchant_id": "M-1025", "metadata": {"amount_cents": 15000, "method": "ACH"}}
+{"timestamp": "2026-04-30T10:02:00Z", "event_type": "transaction_settled", "merchant_id": "M-1001", "transaction_id": "T-99800"}
+{"timestamp": "2026-04-30T15:28:00Z", "event_type": "transaction_processed", "merchant_id": "M-1015", "transaction_id": "T-99893"}
+{"timestamp": "2026-04-30T18:30:00Z", "event_type": "transaction_processed", "merchant_id": "M-1014", "transaction_id": "T-99916"}
+{"timestamp": "2026-05-01T09:53:00Z", "event_type": "payout_initiated", "merchant_id": "M-1023", "metadata": {"amount_cents": 88700, "method": "ACH"}}
+{"timestamp": "2026-05-01T11:30:00Z", "event_type": "transaction_settled", "merchant_id": "M-1002", "transaction_id": "T-99801"}
+{"timestamp": "2026-05-01T12:02:00Z", "event_type": "transaction_settled", "merchant_id": "M-1008", "transaction_id": "T-99860"}
+{"timestamp": "2026-05-01T13:50:00Z", "event_type": "transaction_settled", "merchant_id": "M-1008", "transaction_id": "T-99890"}
+{"timestamp": "2026-05-01T14:24:00Z", "event_type": "transaction_settled", "merchant_id": "M-1029", "transaction_id": "T-99888"}
+{"timestamp": "2026-05-01T18:03:00Z", "event_type": "transaction_processed", "merchant_id": "M-1033", "transaction_id": "T-99978"}
+{"timestamp": "2026-05-02T06:02:00Z", "event_type": "payout_initiated", "merchant_id": "M-1018", "metadata": {"amount_cents": 14900, "method": "ACH"}}
+{"timestamp": "2026-05-02T08:37:00Z", "event_type": "payout_initiated", "merchant_id": "M-1023", "metadata": {"amount_cents": 16800, "method": "ACH"}}
+{"timestamp": "2026-05-02T09:47:00Z", "event_type": "payout_initiated", "merchant_id": "M-1020", "metadata": {"amount_cents": 69200, "method": "ACH"}}
+{"timestamp": "2026-05-02T10:01:00Z", "event_type": "payout_initiated", "merchant_id": "M-1017", "metadata": {"amount_cents": 87400, "method": "ACH"}}
+{"timestamp": "2026-05-02T10:07:00Z", "event_type": "transaction_settled", "merchant_id": "M-1027", "transaction_id": "T-99970"}
+{"timestamp": "2026-05-03T08:17:00Z", "event_type": "transaction_settled", "merchant_id": "M-1020", "transaction_id": "T-99857"}
+{"timestamp": "2026-05-03T08:36:00Z", "event_type": "transaction_settled", "merchant_id": "M-1033", "transaction_id": "T-99978"}
+{"timestamp": "2026-05-03T08:45:00Z", "event_type": "payout_initiated", "merchant_id": "M-1022", "metadata": {"amount_cents": 40700, "method": "ACH"}}
+{"timestamp": "2026-05-03T09:06:00Z", "event_type": "transaction_processed", "merchant_id": "M-1015", "transaction_id": "T-99949"}
+{"timestamp": "2026-05-03T09:58:00Z", "event_type": "transaction_processed", "merchant_id": "M-1026", "transaction_id": "T-99968"}
+{"timestamp": "2026-05-03T10:31:00Z", "event_type": "transaction_processed", "merchant_id": "M-1012", "transaction_id": "T-99932"}
+{"timestamp": "2026-05-03T12:16:00Z", "event_type": "transaction_processed", "merchant_id": "M-1008", "transaction_id": "T-99872"}
+{"timestamp": "2026-05-04T08:05:00Z", "event_type": "transaction_processed", "merchant_id": "M-1032", "transaction_id": "T-99858"}
+{"timestamp": "2026-05-04T08:45:00Z", "event_type": "transaction_processed", "merchant_id": "M-1005", "transaction_id": "T-99806", "metadata": {"currency": "EUR"}}
+{"timestamp": "2026-05-04T09:04:00Z", "event_type": "payout_initiated", "merchant_id": "M-1035", "metadata": {"amount_cents": 55800, "method": "ACH"}}
+{"timestamp": "2026-05-04T09:32:00Z", "event_type": "transaction_processed", "merchant_id": "M-1022", "transaction_id": "T-99910"}
+{"timestamp": "2026-05-04T10:48:00Z", "event_type": "transaction_settled", "merchant_id": "M-1028", "transaction_id": "T-99856"}
+{"timestamp": "2026-05-04T14:11:00Z", "event_type": "transaction_processed", "merchant_id": "M-1025", "transaction_id": "T-99989"}
+{"timestamp": "2026-05-04T14:31:00Z", "event_type": "transaction_processed", "merchant_id": "M-1009", "transaction_id": "T-99984"}
+{"timestamp": "2026-05-04T16:01:00Z", "event_type": "transaction_processed", "merchant_id": "M-1009", "transaction_id": "T-99980"}
+{"timestamp": "2026-05-05T06:46:00Z", "event_type": "payout_initiated", "merchant_id": "M-1016", "metadata": {"amount_cents": 29900, "method": "ACH"}}
+{"timestamp": "2026-05-05T09:45:00Z", "event_type": "payout_initiated", "merchant_id": "M-1008", "metadata": {"amount_cents": 7900, "method": "ACH"}}
+{"timestamp": "2026-05-05T11:16:00Z", "event_type": "transaction_processed", "merchant_id": "M-1024", "transaction_id": "T-99895"}
+{"timestamp": "2026-05-05T13:03:00Z", "event_type": "transaction_processed", "merchant_id": "M-1030", "transaction_id": "T-99899"}
+{"timestamp": "2026-05-05T15:59:00Z", "event_type": "transaction_processed", "merchant_id": "M-1019", "transaction_id": "T-99941"}
+{"timestamp": "2026-05-05T17:23:00Z", "event_type": "transaction_settled", "merchant_id": "M-1008", "transaction_id": "T-99872"}
+{"timestamp": "2026-05-05T17:24:00Z", "event_type": "transaction_settled", "merchant_id": "M-1035", "transaction_id": "T-99870"}
+{"timestamp": "2026-05-05T17:45:00Z", "event_type": "transaction_processed", "merchant_id": "M-1035", "transaction_id": "T-99873"}
+{"timestamp": "2026-05-05T18:10:00Z", "event_type": "transaction_processed", "merchant_id": "M-1019", "transaction_id": "T-99976"}
+{"timestamp": "2026-05-06T07:40:00Z", "event_type": "transaction_processed", "merchant_id": "M-1030", "transaction_id": "T-99901"}
+{"timestamp": "2026-05-06T08:12:00Z", "event_type": "transaction_processed", "merchant_id": "M-1011", "transaction_id": "T-99972"}
+{"timestamp": "2026-05-06T09:15:00Z", "event_type": "payout_failed", "merchant_id": "M-1012", "metadata": {"reason": "invalid_routing_number", "retry_at": "2026-05-07"}}
+{"timestamp": "2026-05-06T12:48:00Z", "event_type": "transaction_processed", "merchant_id": "M-1025", "transaction_id": "T-99878"}
+{"timestamp": "2026-05-06T13:28:00Z", "event_type": "transaction_processed", "merchant_id": "M-1033", "transaction_id": "T-99883"}
+{"timestamp": "2026-05-06T15:46:00Z", "event_type": "transaction_settled", "merchant_id": "M-1022", "transaction_id": "T-99910"}
+{"timestamp": "2026-05-06T18:55:00Z", "event_type": "transaction_processed", "merchant_id": "M-1013", "transaction_id": "T-99902"}
+{"timestamp": "2026-05-07T07:15:00Z", "event_type": "payout_initiated", "merchant_id": "M-1015", "metadata": {"amount_cents": 70500, "method": "ACH"}}
+{"timestamp": "2026-05-07T09:07:00Z", "event_type": "payout_initiated", "merchant_id": "M-1007", "metadata": {"amount_cents": 25600, "method": "ACH"}}
+{"timestamp": "2026-05-07T10:08:00Z", "event_type": "payout_initiated", "merchant_id": "M-1019", "metadata": {"amount_cents": 68100, "method": "ACH"}}
+{"timestamp": "2026-05-07T10:46:00Z", "event_type": "transaction_settled", "merchant_id": "M-1024", "transaction_id": "T-99895"}
+{"timestamp": "2026-05-07T11:30:00Z", "event_type": "payout_initiated", "merchant_id": "M-1013", "metadata": {"amount_cents": 6900, "method": "ACH"}}
+{"timestamp": "2026-05-07T11:31:00Z", "event_type": "transaction_processed", "merchant_id": "M-1019", "transaction_id": "T-99869"}
+{"timestamp": "2026-05-07T11:32:00Z", "event_type": "payout_initiated", "merchant_id": "M-1031", "metadata": {"amount_cents": 80900, "method": "ACH"}}
+{"timestamp": "2026-05-07T14:22:00Z", "event_type": "transaction_settled", "merchant_id": "M-1003", "transaction_id": "T-99802"}
+{"timestamp": "2026-05-07T15:01:00Z", "event_type": "transaction_processed", "merchant_id": "M-1029", "transaction_id": "T-99905"}
+{"timestamp": "2026-05-07T18:21:00Z", "event_type": "transaction_settled", "merchant_id": "M-1011", "transaction_id": "T-99930"}
+{"timestamp": "2026-05-08T06:33:00Z", "event_type": "payout_initiated", "merchant_id": "M-1021", "metadata": {"amount_cents": 12100, "method": "ACH"}}
+{"timestamp": "2026-05-08T08:15:00Z", "event_type": "transaction_processed", "merchant_id": "M-1015", "transaction_id": "T-99979"}
+{"timestamp": "2026-05-08T08:39:00Z", "event_type": "transaction_processed", "merchant_id": "M-1035", "transaction_id": "T-99892"}
+{"timestamp": "2026-05-08T08:43:00Z", "event_type": "transaction_settled", "merchant_id": "M-1025", "transaction_id": "T-99878"}
+{"timestamp": "2026-05-08T11:01:00Z", "event_type": "payout_initiated", "merchant_id": "M-1028", "metadata": {"amount_cents": 77900, "method": "ACH"}}
+{"timestamp": "2026-05-08T11:24:00Z", "event_type": "transaction_processed", "merchant_id": "M-1018", "transaction_id": "T-99925"}
+{"timestamp": "2026-05-08T13:39:00Z", "event_type": "transaction_processed", "merchant_id": "M-1029", "transaction_id": "T-99992"}
+{"timestamp": "2026-05-08T13:52:00Z", "event_type": "transaction_processed", "merchant_id": "M-1030", "transaction_id": "T-99952"}
+{"timestamp": "2026-05-08T14:40:00Z", "event_type": "transaction_settled", "merchant_id": "M-1013", "transaction_id": "T-99902"}
+{"timestamp": "2026-05-08T16:07:00Z", "event_type": "transaction_settled", "merchant_id": "M-1021", "transaction_id": "T-99994"}
+{"timestamp": "2026-05-09T06:26:00Z", "event_type": "payout_initiated", "merchant_id": "M-1019", "metadata": {"amount_cents": 78400, "method": "ACH"}}
+{"timestamp": "2026-05-09T06:32:00Z", "event_type": "payout_initiated", "merchant_id": "M-1031", "metadata": {"amount_cents": 58500, "method": "ACH"}}
+{"timestamp": "2026-05-09T10:50:00Z", "event_type": "transaction_processed", "merchant_id": "M-1031", "transaction_id": "T-99938"}
+{"timestamp": "2026-05-09T12:47:00Z", "event_type": "transaction_processed", "merchant_id": "M-1026", "transaction_id": "T-99951"}
+{"timestamp": "2026-05-09T17:52:00Z", "event_type": "transaction_settled", "merchant_id": "M-1029", "transaction_id": "T-99905"}
+{"timestamp": "2026-05-10T07:16:00Z", "event_type": "payout_initiated", "merchant_id": "M-1021", "metadata": {"amount_cents": 64800, "method": "ACH"}}
+{"timestamp": "2026-05-10T07:48:00Z", "event_type": "payout_initiated", "merchant_id": "M-1013", "metadata": {"amount_cents": 12400, "method": "ACH"}}
+{"timestamp": "2026-05-10T08:54:00Z", "event_type": "payout_initiated", "merchant_id": "M-1015", "metadata": {"amount_cents": 73100, "method": "ACH"}}
+{"timestamp": "2026-05-10T10:45:00Z", "event_type": "transaction_settled", "merchant_id": "M-1030", "transaction_id": "T-99952"}
+{"timestamp": "2026-05-10T11:08:00Z", "event_type": "transaction_processed", "merchant_id": "M-1003", "transaction_id": "T-99812", "metadata": {"amount_cents": 85000}}
+{"timestamp": "2026-05-10T12:00:00Z", "event_type": "transaction_processed", "merchant_id": "M-1017", "transaction_id": "T-99958"}
+{"timestamp": "2026-05-11T07:14:00Z", "event_type": "payout_initiated", "merchant_id": "M-1033", "metadata": {"amount_cents": 30700, "method": "ACH"}}
+{"timestamp": "2026-05-11T07:30:00Z", "event_type": "transaction_processed", "merchant_id": "M-1005", "transaction_id": "T-99819", "metadata": {"currency": "GBP"}}
+{"timestamp": "2026-05-11T07:55:00Z", "event_type": "transaction_processed", "merchant_id": "M-1017", "transaction_id": "T-99841"}
+{"timestamp": "2026-05-11T08:46:00Z", "event_type": "payout_initiated", "merchant_id": "M-1018", "metadata": {"amount_cents": 6400, "method": "ACH"}}
+{"timestamp": "2026-05-11T11:18:00Z", "event_type": "transaction_settled", "merchant_id": "M-1031", "transaction_id": "T-99938"}
+{"timestamp": "2026-05-11T11:41:00Z", "event_type": "payout_initiated", "merchant_id": "M-1011", "metadata": {"amount_cents": 21600, "method": "ACH"}}
+{"timestamp": "2026-05-11T13:44:00Z", "event_type": "transaction_processed", "merchant_id": "M-1007", "transaction_id": "T-99881"}
+{"timestamp": "2026-05-11T18:45:00Z", "event_type": "transaction_settled", "merchant_id": "M-1016", "transaction_id": "T-99880"}
+{"timestamp": "2026-05-12T07:21:00Z", "event_type": "payout_initiated", "merchant_id": "M-1011", "metadata": {"amount_cents": 46700, "method": "ACH"}}
+{"timestamp": "2026-05-12T07:23:00Z", "event_type": "transaction_processed", "merchant_id": "M-1034", "transaction_id": "T-99848"}
+{"timestamp": "2026-05-12T08:00:00Z", "event_type": "chargeback_ratio_warning", "merchant_id": "M-1030", "metadata": {"ratio_30d": 0.016, "threshold_triggered": "suspension"}}
+{"timestamp": "2026-05-12T09:16:00Z", "event_type": "payout_failed", "merchant_id": "M-1012", "metadata": {"reason": "invalid_routing_number", "retry_at": "2026-05-13"}}
+{"timestamp": "2026-05-12T09:51:00Z", "event_type": "transaction_processed", "merchant_id": "M-1010", "transaction_id": "T-99882"}
+{"timestamp": "2026-05-12T10:01:00Z", "event_type": "transaction_processed", "merchant_id": "M-1011", "transaction_id": "T-99840"}
+{"timestamp": "2026-05-12T10:13:00Z", "event_type": "payout_initiated", "merchant_id": "M-1021", "metadata": {"amount_cents": 66300, "method": "ACH"}}
+{"timestamp": "2026-05-12T11:52:00Z", "event_type": "transaction_processed", "merchant_id": "M-1015", "transaction_id": "T-99909"}
+{"timestamp": "2026-05-12T11:53:00Z", "event_type": "payout_initiated", "merchant_id": "M-1007", "metadata": {"amount_cents": 41700, "method": "ACH"}}
+{"timestamp": "2026-05-12T13:06:00Z", "event_type": "transaction_processed", "merchant_id": "M-1020", "transaction_id": "T-99874"}
+{"timestamp": "2026-05-12T15:07:00Z", "event_type": "transaction_processed", "merchant_id": "M-1008", "transaction_id": "T-99993"}
+{"timestamp": "2026-05-12T17:37:00Z", "event_type": "transaction_processed", "merchant_id": "M-1007", "transaction_id": "T-99973"}
+{"timestamp": "2026-05-13T11:48:00Z", "event_type": "payout_initiated", "merchant_id": "M-1007", "metadata": {"amount_cents": 15000, "method": "ACH"}}
+{"timestamp": "2026-05-14T08:14:00Z", "event_type": "transaction_processed", "merchant_id": "M-1019", "transaction_id": "T-99844"}
+{"timestamp": "2026-05-14T10:00:00Z", "event_type": "merchant_suspended", "merchant_id": "M-1030", "metadata": {"reason": "chargeback_ratio_exceeded_suspension_threshold", "ratio_30d": 0.016}}
+{"timestamp": "2026-05-14T10:06:00Z", "event_type": "transaction_settled", "merchant_id": "M-1020", "transaction_id": "T-99874"}
+{"timestamp": "2026-05-14T15:19:00Z", "event_type": "transaction_processed", "merchant_id": "M-1013", "transaction_id": "T-99913"}
+{"timestamp": "2026-05-14T17:18:00Z", "event_type": "transaction_settled", "merchant_id": "M-1023", "transaction_id": "T-99940"}
+{"timestamp": "2026-05-14T17:47:00Z", "event_type": "transaction_processed", "merchant_id": "M-1025", "transaction_id": "T-99918"}
+{"timestamp": "2026-05-15T07:02:00Z", "event_type": "transaction_settled", "merchant_id": "M-1013", "transaction_id": "T-99975"}
+{"timestamp": "2026-05-15T07:09:00Z", "event_type": "payout_initiated", "merchant_id": "M-1027", "metadata": {"amount_cents": 79800, "method": "ACH"}}
+{"timestamp": "2026-05-15T07:58:00Z", "event_type": "payout_initiated", "merchant_id": "M-1035", "metadata": {"amount_cents": 36700, "method": "ACH"}}
+{"timestamp": "2026-05-15T08:09:00Z", "event_type": "transaction_processed", "merchant_id": "M-1023", "transaction_id": "T-99988"}
+{"timestamp": "2026-05-15T12:46:00Z", "event_type": "transaction_processed", "merchant_id": "M-1016", "transaction_id": "T-99877"}
+{"timestamp": "2026-05-15T13:45:00Z", "event_type": "dispute_filed", "merchant_id": "M-1003", "transaction_id": "T-99818", "dispute_id": "D-503", "metadata": {"reason_code": "product_unacceptable"}}
+{"timestamp": "2026-05-15T14:14:00Z", "event_type": "transaction_processed", "merchant_id": "M-1031", "transaction_id": "T-99845"}
+{"timestamp": "2026-05-15T14:47:00Z", "event_type": "transaction_processed", "merchant_id": "M-1034", "transaction_id": "T-99937"}
+{"timestamp": "2026-05-16T07:12:00Z", "event_type": "payout_initiated", "merchant_id": "M-1016", "metadata": {"amount_cents": 30400, "method": "ACH"}}
+{"timestamp": "2026-05-16T08:39:00Z", "event_type": "transaction_processed", "merchant_id": "M-1026", "transaction_id": "T-99847"}
+{"timestamp": "2026-05-16T09:40:00Z", "event_type": "payout_failed", "merchant_id": "M-1020", "metadata": {"reason": "bank_transfer_rejected", "retry_at": "2026-05-17"}}
+{"timestamp": "2026-05-16T10:29:00Z", "event_type": "payout_initiated", "merchant_id": "M-1025", "metadata": {"amount_cents": 60700, "method": "ACH"}}
+{"timestamp": "2026-05-16T10:51:00Z", "event_type": "transaction_processed", "merchant_id": "M-1026", "transaction_id": "T-99967"}
+{"timestamp": "2026-05-16T18:58:00Z", "event_type": "transaction_processed", "merchant_id": "M-1019", "transaction_id": "T-99950"}
+{"timestamp": "2026-05-17T07:04:00Z", "event_type": "transaction_settled", "merchant_id": "M-1023", "transaction_id": "T-99988"}
+{"timestamp": "2026-05-17T07:15:00Z", "event_type": "transaction_settled", "merchant_id": "M-1016", "transaction_id": "T-99877"}
+{"timestamp": "2026-05-17T08:49:00Z", "event_type": "transaction_processed", "merchant_id": "M-1031", "transaction_id": "T-99927"}
+{"timestamp": "2026-05-17T09:05:00Z", "event_type": "payout_initiated", "merchant_id": "M-1020", "metadata": {"amount_cents": 41200, "method": "ACH", "retry_of_failed": true}}
+{"timestamp": "2026-05-17T09:14:00Z", "event_type": "payout_initiated", "merchant_id": "M-1017", "metadata": {"amount_cents": 57100, "method": "ACH"}}
+{"timestamp": "2026-05-17T12:28:00Z", "event_type": "transaction_processed", "merchant_id": "M-1007", "transaction_id": "T-99894"}
+{"timestamp": "2026-05-17T13:23:00Z", "event_type": "transaction_settled", "merchant_id": "M-1034", "transaction_id": "T-99937"}
+{"timestamp": "2026-05-17T16:01:00Z", "event_type": "transaction_processed", "merchant_id": "M-1031", "transaction_id": "T-99863"}
+{"timestamp": "2026-05-17T18:56:00Z", "event_type": "transaction_processed", "merchant_id": "M-1009", "transaction_id": "T-99849"}
+{"timestamp": "2026-05-18T09:00:00Z", "event_type": "merchant_rejected", "merchant_id": "M-1006", "metadata": {"reason": "restricted_category_nutraceuticals", "applicant_name": "Verdant Wellness LLC"}}
+{"timestamp": "2026-05-18T09:17:00Z", "event_type": "payout_failed", "merchant_id": "M-1012", "metadata": {"reason": "invalid_routing_number", "retry_at": "2026-05-19"}}
+{"timestamp": "2026-05-18T10:30:00Z", "event_type": "transaction_processed", "merchant_id": "M-1001", "transaction_id": "T-99814"}
+{"timestamp": "2026-05-18T10:34:00Z", "event_type": "payout_initiated", "merchant_id": "M-1034", "metadata": {"amount_cents": 11000, "method": "ACH"}}
+{"timestamp": "2026-05-18T12:40:00Z", "event_type": "transaction_processed", "merchant_id": "M-1009", "transaction_id": "T-99947"}
+{"timestamp": "2026-05-18T16:07:00Z", "event_type": "transaction_processed", "merchant_id": "M-1027", "transaction_id": "T-99896"}
+{"timestamp": "2026-05-18T18:18:00Z", "event_type": "transaction_settled", "merchant_id": "M-1026", "transaction_id": "T-99967"}
+{"timestamp": "2026-05-18T18:43:00Z", "event_type": "transaction_settled", "merchant_id": "M-1019", "transaction_id": "T-99950"}
+{"timestamp": "2026-05-19T06:11:00Z", "event_type": "payout_initiated", "merchant_id": "M-1026", "metadata": {"amount_cents": 80000, "method": "ACH"}}
+{"timestamp": "2026-05-19T07:19:00Z", "event_type": "transaction_settled", "merchant_id": "M-1026", "transaction_id": "T-99964"}
+{"timestamp": "2026-05-19T07:27:00Z", "event_type": "payout_initiated", "merchant_id": "M-1027", "metadata": {"amount_cents": 73800, "method": "ACH"}}
+{"timestamp": "2026-05-19T08:00:00Z", "event_type": "chargeback_ratio_warning", "merchant_id": "M-1003", "metadata": {"ratio_30d": 0.013, "threshold_triggered": "monitoring"}}
+{"timestamp": "2026-05-19T09:42:00Z", "event_type": "transaction_settled", "merchant_id": "M-1010", "transaction_id": "T-99983"}
+{"timestamp": "2026-05-19T10:08:00Z", "event_type": "transaction_processed", "merchant_id": "M-1007", "transaction_id": "T-99867"}
+{"timestamp": "2026-05-19T10:18:00Z", "event_type": "transaction_processed", "merchant_id": "M-1017", "transaction_id": "T-99934"}
+{"timestamp": "2026-05-19T10:39:00Z", "event_type": "transaction_processed", "merchant_id": "M-1010", "transaction_id": "T-99928"}
+{"timestamp": "2026-05-19T11:55:00Z", "event_type": "payout_initiated", "merchant_id": "M-1028", "metadata": {"amount_cents": 33000, "method": "ACH"}}
+{"timestamp": "2026-05-19T12:00:00Z", "event_type": "transaction_processed", "merchant_id": "M-1027", "transaction_id": "T-99944"}
+{"timestamp": "2026-05-19T13:31:00Z", "event_type": "transaction_processed", "merchant_id": "M-1035", "transaction_id": "T-99900"}
+{"timestamp": "2026-05-19T15:42:00Z", "event_type": "transaction_processed", "merchant_id": "M-1001", "transaction_id": "T-99816", "metadata": {"amount_cents": 199900}}
+{"timestamp": "2026-05-19T16:23:00Z", "event_type": "dispute_filed", "merchant_id": "M-1017", "transaction_id": "T-99841", "dispute_id": "D-505", "metadata": {"reason_code": "product_not_received"}}
+{"timestamp": "2026-05-19T16:31:00Z", "event_type": "dispute_filed", "merchant_id": "M-1011", "transaction_id": "T-99840", "dispute_id": "D-504", "metadata": {"reason_code": "fraudulent"}}
+{"timestamp": "2026-05-19T17:13:00Z", "event_type": "transaction_processed", "merchant_id": "M-1017", "transaction_id": "T-99836"}
+{"timestamp": "2026-05-19T17:23:00Z", "event_type": "transaction_processed", "merchant_id": "M-1017", "transaction_id": "T-99960"}
+{"timestamp": "2026-05-20T09:11:00Z", "event_type": "payout_initiated", "merchant_id": "M-1017", "metadata": {"amount_cents": 23100, "method": "ACH"}}
+{"timestamp": "2026-05-20T09:59:00Z", "event_type": "transaction_processed", "merchant_id": "M-1023", "transaction_id": "T-99838"}
+{"timestamp": "2026-05-20T11:12:00Z", "event_type": "transaction_processed", "merchant_id": "M-1011", "transaction_id": "T-99837"}
+{"timestamp": "2026-05-20T12:15:00Z", "event_type": "dispute_filed", "merchant_id": "M-1003", "transaction_id": "T-99812", "dispute_id": "D-501", "metadata": {"reason_code": "product_not_received"}}
+{"timestamp": "2026-05-20T12:50:00Z", "event_type": "dispute_filed", "merchant_id": "M-1023", "transaction_id": "T-99842", "dispute_id": "D-506", "metadata": {"reason_code": "duplicate_charge"}}
+{"timestamp": "2026-05-20T13:29:00Z", "event_type": "dispute_filed", "merchant_id": "M-1030", "transaction_id": "T-99843", "dispute_id": "D-507", "metadata": {"reason_code": "product_unacceptable"}}
+{"timestamp": "2026-05-20T14:25:00Z", "event_type": "transaction_settled", "merchant_id": "M-1027", "transaction_id": "T-99896"}
+{"timestamp": "2026-05-20T15:27:00Z", "event_type": "transaction_settled", "merchant_id": "M-1033", "transaction_id": "T-99898"}
+{"timestamp": "2026-05-20T16:00:00Z", "event_type": "transaction_settled", "merchant_id": "M-1005", "transaction_id": "T-99830"}
+{"timestamp": "2026-05-21T07:48:00Z", "event_type": "transaction_settled", "merchant_id": "M-1017", "transaction_id": "T-99960"}
+{"timestamp": "2026-05-21T08:30:00Z", "event_type": "payout_initiated", "merchant_id": "M-1001", "metadata": {"amount_cents": 195000, "method": "ACH"}}
+{"timestamp": "2026-05-21T09:26:00Z", "event_type": "payout_initiated", "merchant_id": "M-1020", "metadata": {"amount_cents": 28700, "method": "ACH"}}
+{"timestamp": "2026-05-21T10:00:00Z", "event_type": "appeal_filed", "merchant_id": "M-1006", "metadata": {"applicant_name": "Verdant Wellness LLC"}}
+{"timestamp": "2026-05-21T10:26:00Z", "event_type": "dispute_filed", "merchant_id": "M-1031", "transaction_id": "T-99845", "dispute_id": "D-509", "metadata": {"reason_code": "fraudulent"}}
+{"timestamp": "2026-05-21T10:58:00Z", "event_type": "payout_initiated", "merchant_id": "M-1024", "metadata": {"amount_cents": 9300, "method": "ACH"}}
+{"timestamp": "2026-05-21T12:00:00Z", "event_type": "transaction_processed", "merchant_id": "M-1031", "transaction_id": "T-99924"}
+{"timestamp": "2026-05-21T12:55:00Z", "event_type": "transaction_settled", "merchant_id": "M-1017", "transaction_id": "T-99836"}
+{"timestamp": "2026-05-21T13:07:00Z", "event_type": "transaction_processed", "merchant_id": "M-1027", "transaction_id": "T-99866"}
+{"timestamp": "2026-05-21T13:35:00Z", "event_type": "transaction_processed", "merchant_id": "M-1019", "transaction_id": "T-99839"}
+{"timestamp": "2026-05-21T15:08:00Z", "event_type": "dispute_filed", "merchant_id": "M-1019", "transaction_id": "T-99844", "dispute_id": "D-508", "metadata": {"reason_code": "credit_not_processed"}}
+{"timestamp": "2026-05-21T17:18:00Z", "event_type": "transaction_settled", "merchant_id": "M-1010", "transaction_id": "T-99928"}
+{"timestamp": "2026-05-22T06:16:00Z", "event_type": "payout_initiated", "merchant_id": "M-1014", "metadata": {"amount_cents": 37300, "method": "ACH"}}
+{"timestamp": "2026-05-22T07:15:00Z", "event_type": "transaction_refunded", "merchant_id": "M-1001", "transaction_id": "T-99814", "metadata": {"amount_cents": 22000, "fee_returned": false}}
+{"timestamp": "2026-05-22T08:15:00Z", "event_type": "payout_initiated", "merchant_id": "M-1027", "metadata": {"amount_cents": 59400, "method": "ACH"}}
+{"timestamp": "2026-05-22T08:54:00Z", "event_type": "payout_initiated", "merchant_id": "M-1025", "metadata": {"amount_cents": 63000, "method": "ACH"}}
+{"timestamp": "2026-05-22T09:00:00Z", "event_type": "payout_failed", "merchant_id": "M-1004", "metadata": {"reason": "closed_bank_account", "retry_at": "2026-05-23"}}
+{"timestamp": "2026-05-22T09:24:00Z", "event_type": "transaction_processed", "merchant_id": "M-1027", "transaction_id": "T-99997"}
+{"timestamp": "2026-05-22T10:20:00Z", "event_type": "transaction_settled", "merchant_id": "M-1011", "transaction_id": "T-99837"}
+{"timestamp": "2026-05-22T11:30:00Z", "event_type": "transaction_processed", "merchant_id": "M-1004", "transaction_id": "T-99820"}
+{"timestamp": "2026-05-22T12:05:00Z", "event_type": "dispute_filed", "merchant_id": "M-1012", "transaction_id": "T-99846", "dispute_id": "D-510", "metadata": {"reason_code": "product_not_received"}}
+{"timestamp": "2026-05-22T12:41:00Z", "event_type": "transaction_settled", "merchant_id": "M-1019", "transaction_id": "T-99886"}
+{"timestamp": "2026-05-22T14:19:00Z", "event_type": "transaction_processed", "merchant_id": "M-1034", "transaction_id": "T-99917"}
+{"timestamp": "2026-05-22T14:41:00Z", "event_type": "transaction_settled", "merchant_id": "M-1031", "transaction_id": "T-99903"}
+{"timestamp": "2026-05-22T14:58:00Z", "event_type": "dispute_filed", "merchant_id": "M-1026", "transaction_id": "T-99847", "dispute_id": "D-511", "metadata": {"reason_code": "fraudulent"}}
+{"timestamp": "2026-05-22T15:44:00Z", "event_type": "transaction_processed", "merchant_id": "M-1011", "transaction_id": "T-99865"}
+{"timestamp": "2026-05-23T06:07:00Z", "event_type": "payout_initiated", "merchant_id": "M-1034", "metadata": {"amount_cents": 66200, "method": "ACH"}}
+{"timestamp": "2026-05-23T07:02:00Z", "event_type": "payout_initiated", "merchant_id": "M-1015", "metadata": {"amount_cents": 84900, "method": "ACH"}}
+{"timestamp": "2026-05-23T07:22:00Z", "event_type": "payout_initiated", "merchant_id": "M-1012", "metadata": {"amount_cents": 33400, "method": "ACH"}}
+{"timestamp": "2026-05-23T07:59:00Z", "event_type": "transaction_settled", "merchant_id": "M-1019", "transaction_id": "T-99839"}
+{"timestamp": "2026-05-23T08:00:00Z", "event_type": "dispute_filed", "merchant_id": "M-1001", "transaction_id": "T-99815", "dispute_id": "D-502", "metadata": {"reason_code": "fraudulent"}}
+{"timestamp": "2026-05-23T08:14:00Z", "event_type": "dispute_filed", "merchant_id": "M-1034", "transaction_id": "T-99848", "dispute_id": "D-512", "metadata": {"reason_code": "product_not_received"}}
+{"timestamp": "2026-05-23T10:39:00Z", "event_type": "payout_initiated", "merchant_id": "M-1024", "metadata": {"amount_cents": 56000, "method": "ACH"}}
+{"timestamp": "2026-05-23T10:45:00Z", "event_type": "transaction_settled", "merchant_id": "M-1001", "transaction_id": "T-99835"}
+{"timestamp": "2026-05-23T12:53:00Z", "event_type": "dispute_filed", "merchant_id": "M-1009", "transaction_id": "T-99849", "dispute_id": "D-513", "metadata": {"reason_code": "duplicate_charge"}}
+{"timestamp": "2026-05-23T13:45:00Z", "event_type": "transaction_settled", "merchant_id": "M-1018", "transaction_id": "T-99933"}
+{"timestamp": "2026-05-23T13:52:00Z", "event_type": "transaction_settled", "merchant_id": "M-1031", "transaction_id": "T-99924"}
+{"timestamp": "2026-05-23T17:08:00Z", "event_type": "transaction_processed", "merchant_id": "M-1008", "transaction_id": "T-99948"}
+{"timestamp": "2026-05-23T18:58:00Z", "event_type": "transaction_settled", "merchant_id": "M-1021", "transaction_id": "T-99914"}
+{"timestamp": "2026-05-24T07:40:00Z", "event_type": "transaction_processed", "merchant_id": "M-1013", "transaction_id": "T-99859"}
+{"timestamp": "2026-05-24T07:54:00Z", "event_type": "transaction_settled", "merchant_id": "M-1027", "transaction_id": "T-99961"}
+{"timestamp": "2026-05-24T09:00:00Z", "event_type": "payout_initiated", "merchant_id": "M-1002", "metadata": {"amount_cents": 89000, "method": "ACH"}}
+{"timestamp": "2026-05-24T09:18:00Z", "event_type": "payout_failed", "merchant_id": "M-1012", "metadata": {"reason": "invalid_routing_number", "retry_at": "2026-05-25"}}
+{"timestamp": "2026-05-24T10:09:00Z", "event_type": "transaction_processed", "merchant_id": "M-1029", "transaction_id": "T-99907"}
+{"timestamp": "2026-05-24T14:00:00Z", "event_type": "transaction_settled", "merchant_id": "M-1003", "transaction_id": "T-99826"}
+{"timestamp": "2026-05-24T15:39:00Z", "event_type": "dispute_filed", "merchant_id": "M-1028", "transaction_id": "T-99850", "dispute_id": "D-514", "metadata": {"reason_code": "product_unacceptable"}}
+{"timestamp": "2026-05-24T16:17:00Z", "event_type": "dispute_filed", "merchant_id": "M-1022", "transaction_id": "T-99851", "dispute_id": "D-515", "metadata": {"reason_code": "fraudulent"}}
+{"timestamp": "2026-05-24T16:26:00Z", "event_type": "transaction_settled", "merchant_id": "M-1016", "transaction_id": "T-99904"}
+{"timestamp": "2026-05-25T08:15:00Z", "event_type": "transaction_processed", "merchant_id": "M-1001", "transaction_id": "T-99813"}
+{"timestamp": "2026-05-25T08:30:00Z", "event_type": "payout_initiated", "merchant_id": "M-1005", "metadata": {"amount_cents": 28000, "method": "ACH"}}
+{"timestamp": "2026-05-25T09:43:00Z", "event_type": "payout_initiated", "merchant_id": "M-1035", "metadata": {"amount_cents": 50100, "method": "ACH"}}
+{"timestamp": "2026-05-25T10:00:00Z", "event_type": "payout_initiated", "merchant_id": "M-1034", "metadata": {"amount_cents": 30500, "method": "ACH"}}
+{"timestamp": "2026-05-25T10:40:00Z", "event_type": "transaction_processed", "merchant_id": "M-1029", "transaction_id": "T-99864"}
+{"timestamp": "2026-05-25T11:51:00Z", "event_type": "payout_initiated", "merchant_id": "M-1032", "metadata": {"amount_cents": 54100, "method": "ACH"}}
+{"timestamp": "2026-05-25T12:58:00Z", "event_type": "transaction_settled", "merchant_id": "M-1032", "transaction_id": "T-99936"}
+{"timestamp": "2026-05-25T13:13:00Z", "event_type": "transaction_processed", "merchant_id": "M-1017", "transaction_id": "T-99954"}
+{"timestamp": "2026-05-25T14:47:00Z", "event_type": "transaction_settled", "merchant_id": "M-1027", "transaction_id": "T-99931"}
+{"timestamp": "2026-05-25T15:00:00Z", "event_type": "transaction_processed", "merchant_id": "M-1023", "transaction_id": "T-99871"}
+{"timestamp": "2026-05-25T15:01:00Z", "event_type": "transaction_processed", "merchant_id": "M-1034", "transaction_id": "T-99935"}
+{"timestamp": "2026-05-25T15:40:00Z", "event_type": "transaction_processed", "merchant_id": "M-1014", "transaction_id": "T-99971"}
+{"timestamp": "2026-05-25T15:55:00Z", "event_type": "transaction_processed", "merchant_id": "M-1027", "transaction_id": "T-99942"}
