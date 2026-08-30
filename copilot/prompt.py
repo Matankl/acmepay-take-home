@@ -15,7 +15,7 @@ from __future__ import annotations
 from functools import lru_cache
 
 from . import corpus, digest, precedent
-from .config import RETRIEVAL_MODE, TODAY_ISO
+from .config import RETRIEVAL_REPAIR_TOP_K, TODAY_ISO
 
 _ROLE = f"""\
 You are the Acmepay support copilot. You work for Acmepay's internal support
@@ -177,11 +177,14 @@ declining and the authority for it -- one sentence, no apology.
 def system_block() -> str:
     parts = [_ROLE, _DISPOSITION, _STYLE, _EVIDENCE_RULES]
 
+    from .retrieval import effective_mode
+    mode = effective_mode()
+
     collisions = corpus.render_collisions()
     if collisions:
         parts.append("# AMBIGUOUS QUANTITIES\n" + collisions)
 
-    if RETRIEVAL_MODE == "full":
+    if mode == "full":
         parts.append("# POLICY INDEX (where each topic lives)\n" + corpus.render_toc())
         parts.append("# POLICY DOCUMENTS (complete corpus)\n" + corpus.render_all())
     parts.append("# PORTFOLIO DIGEST\n" + digest.render())
@@ -189,12 +192,21 @@ def system_block() -> str:
     return "\n\n".join(parts)
 
 
-def user_block(question: str, evidence, precedent_hits: str, mandated: str | None) -> str:
+def user_block(question: str, evidence, precedent_hits: str, mandated: str | None,
+               ctx=None) -> str:
+    from .retrieval import effective_mode
+    mode = effective_mode()
+
     parts = []
-    if RETRIEVAL_MODE != "full":
+    if mode != "full":
         from .retrieval import render_retrieved
-        parts.append("# POLICY EXCERPTS\n" + render_retrieved(question))
-    if RETRIEVAL_MODE == "full":
+        parts.append("# POLICY EXCERPTS\n" + render_retrieved(question, ctx=ctx))
+    if mode == "full":
+        # Everything is injected, so the "what did the model see" set is the whole
+        # corpus. Seeding ctx here keeps full mode a special case of the same
+        # citation-scoping logic instead of a second code path in cite.py.
+        if ctx is not None:
+            ctx.add(corpus.sections())
         from .retrieval import relevant_labels
         hints = relevant_labels(question)
         if hints:
@@ -226,7 +238,8 @@ def user_block(question: str, evidence, precedent_hits: str, mandated: str | Non
     return "\n\n".join(parts)
 
 
-def repair_block(question: str, previous, problems, evidence, mandated: str | None) -> str:
+def repair_block(question: str, previous, problems, evidence, mandated: str | None,
+                 ctx=None) -> str:
     """The revision prompt.
 
     It must restate the question. An earlier version passed only the previous
@@ -251,11 +264,28 @@ def repair_block(question: str, previous, problems, evidence, mandated: str | No
     lines += [f"- [{p.code}] {p.instruction}" for p in problems]
     if mandated:
         lines += ["", "The reply must open with exactly: " + mandated]
-    if RETRIEVAL_MODE == "full":
+    from .retrieval import effective_mode
+    if effective_mode() == "full":
         from .retrieval import relevant_labels
         hints = relevant_labels(question)
         if hints:
             lines += ["", "# LIKELY RELEVANT SECTIONS",
                       *(f"- {h}" for h in hints)]
+    else:
+        # Under retrieval the first pass showed only a slice, so the repair prompt
+        # has to carry policy text of its own -- otherwise the revision runs with
+        # LESS context than the draft it is fixing.
+        #
+        # An `ungrounded` failure is direct evidence that slice was too narrow, so
+        # widen the search and union it in. Any other failure is about wording or
+        # disposition and gains nothing from more text, so re-show what was already
+        # there and skip the scoring pass.
+        from .retrieval import render_context, render_retrieved
+        if any(getattr(p, "code", "") == "ungrounded" for p in problems):
+            excerpts = render_retrieved(question, top_k=RETRIEVAL_REPAIR_TOP_K, ctx=ctx)
+        else:
+            excerpts = render_context(ctx)
+        if excerpts:
+            lines += ["", "# POLICY EXCERPTS", excerpts]
     lines += ["", "# RECORDS", evidence.render()]
     return "\n".join(lines)

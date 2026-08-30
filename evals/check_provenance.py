@@ -11,7 +11,6 @@ in CI without adding a test dependency.
 """
 from __future__ import annotations
 
-import sys
 
 from copilot.corpus import doc_text, sections
 from copilot.enrich import PROVENANCE

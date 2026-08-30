@@ -109,10 +109,11 @@ MAX_ATTEMPTS = 4
 
 # Ollama silently truncates a prompt to the server-side context window, which
 # recent releases default to 4096 tokens. The request still succeeds, so nothing
-# in the response says the policy corpus was cut off. The full-context design puts
-# ~13K tokens in front of the model, so this has to be set explicitly or the run
-# is measuring a truncated prompt. Local inference is also far slower than a
-# hosted endpoint, hence the longer deadline.
+# in the response says the policy excerpts were cut off. Measured with the
+# gpt-4o-mini tokenizer, the assembled prompt is ~7.1K tokens under the default
+# hybrid retrieval and ~11.3K under ACMEPAY_RETRIEVAL_MODE=full, so this has to be
+# set explicitly or the run is measuring a truncated prompt. Local inference is
+# also far slower than a hosted endpoint, hence the longer deadline.
 _NUM_CTX = int(os.environ.get("ACMEPAY_NUM_CTX", "16384"))
 _LOCAL_TIMEOUT_S = float(os.environ.get("ACMEPAY_TIMEOUT_S", "900"))
 

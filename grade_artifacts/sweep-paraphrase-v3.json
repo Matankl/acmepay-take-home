@@ -1,0 +1,80 @@
+{
+  "degraded_generations": 0,
+  "failed_case_ids": [
+    "px_adv_002",
+    "px_adv_012",
+    "px_lex_008",
+    "px_str_003"
+  ],
+  "per_case": {
+    "px_adv_001": true,
+    "px_adv_002": false,
+    "px_adv_003": true,
+    "px_adv_004": true,
+    "px_adv_005": true,
+    "px_adv_006": true,
+    "px_adv_007": true,
+    "px_adv_008": true,
+    "px_adv_009": true,
+    "px_adv_010": true,
+    "px_adv_011": true,
+    "px_adv_012": false,
+    "px_lex_001": true,
+    "px_lex_002": true,
+    "px_lex_003": true,
+    "px_lex_004": true,
+    "px_lex_005": true,
+    "px_lex_006": true,
+    "px_lex_007": true,
+    "px_lex_008": false,
+    "px_lex_009": true,
+    "px_str_001": true,
+    "px_str_002": true,
+    "px_str_003": false,
+    "px_str_004": true,
+    "px_str_005": true,
+    "px_str_006": true,
+    "px_str_007": true,
+    "px_str_008": true
+  },
+  "per_category": {
+    "paraphrase_adversarial": {
+      "passed": 10,
+      "total": 12
+    },
+    "paraphrase_lexical": {
+      "passed": 8,
+      "total": 9
+    },
+    "paraphrase_structural": {
+      "passed": 7,
+      "total": 8
+    }
+  },
+  "recorded_at_utc": "2026-08-29T09:47:02+00:00",
+  "samples": 1,
+  "suites": [
+    "paraphrase_lexical",
+    "paraphrase_structural",
+    "paraphrase_adversarial"
+  ],
+  "system": "system",
+  "tag": "paraphrase-v3",
+  "telemetry": {
+    "cached_tokens": 0.0,
+    "completion_tokens": 6562.0,
+    "cost_usd": 0.049208,
+    "error_count": 0.0,
+    "latency_s": 424.263,
+    "llm_calls": 32.0,
+    "prompt_tokens": 465862.0,
+    "repairs": 3.0,
+    "tool_calls": 68.0
+  },
+  "total": {
+    "passed": 25,
+    "total": 29
+  },
+  "valid_measurement": true,
+  "wall_seconds": 166.3
+}

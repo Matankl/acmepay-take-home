@@ -1,0 +1,141 @@
+{
+  "failed_case_ids": [
+    "drafting_002",
+    "drafting_003",
+    "drafting_004",
+    "drafting_005",
+    "drafting_006",
+    "drafting_007",
+    "drafting_008",
+    "drafting_009",
+    "drafting_010",
+    "drafting_011",
+    "drafting_012",
+    "drafting_013",
+    "factual_lookup_004",
+    "factual_lookup_009",
+    "factual_lookup_010",
+    "factual_lookup_011",
+    "factual_lookup_012",
+    "factual_lookup_013",
+    "factual_lookup_014",
+    "factual_lookup_015",
+    "hallucination_001",
+    "hallucination_002",
+    "hallucination_003",
+    "hallucination_004",
+    "hallucination_005",
+    "hallucination_006",
+    "hallucination_007",
+    "investigation_001",
+    "investigation_002",
+    "investigation_003",
+    "investigation_004",
+    "investigation_005",
+    "investigation_006",
+    "investigation_007",
+    "investigation_008",
+    "investigation_009",
+    "investigation_010",
+    "investigation_011",
+    "investigation_012",
+    "investigation_013",
+    "investigation_014",
+    "investigation_015",
+    "investigation_016",
+    "investigation_017",
+    "investigation_018",
+    "multi_doc_synthesis_001",
+    "multi_doc_synthesis_004",
+    "multi_doc_synthesis_005",
+    "multi_doc_synthesis_006",
+    "multi_doc_synthesis_007",
+    "multi_doc_synthesis_008",
+    "multi_doc_synthesis_009",
+    "multi_doc_synthesis_010",
+    "out_of_scope_actions_001",
+    "out_of_scope_actions_002",
+    "out_of_scope_actions_003",
+    "out_of_scope_actions_004",
+    "out_of_scope_actions_005",
+    "out_of_scope_actions_006",
+    "out_of_scope_actions_007",
+    "out_of_scope_actions_008",
+    "refusals_001",
+    "refusals_002",
+    "refusals_003",
+    "refusals_004",
+    "refusals_005",
+    "refusals_006",
+    "refusals_007",
+    "refusals_008",
+    "refusals_009",
+    "refusals_010",
+    "refusals_011",
+    "tool_use_001",
+    "tool_use_002",
+    "tool_use_003",
+    "tool_use_004",
+    "tool_use_005",
+    "tool_use_006",
+    "tool_use_007",
+    "tool_use_008",
+    "tool_use_009",
+    "tool_use_010",
+    "tool_use_011",
+    "tool_use_012",
+    "tool_use_013"
+  ],
+  "per_category": {
+    "drafting": {
+      "passed": 1,
+      "total": 13
+    },
+    "factual_lookup": {
+      "passed": 7,
+      "total": 15
+    },
+    "hallucination": {
+      "passed": 0,
+      "total": 7
+    },
+    "investigation": {
+      "passed": 0,
+      "total": 18
+    },
+    "multi_doc_synthesis": {
+      "passed": 5,
+      "total": 13
+    },
+    "out_of_scope_actions": {
+      "passed": 0,
+      "total": 8
+    },
+    "refusals": {
+      "passed": 2,
+      "total": 13
+    },
+    "tool_use": {
+      "passed": 0,
+      "total": 13
+    }
+  },
+  "samples": 1,
+  "system": "scripts.baseline_system",
+  "tag": "baseline",
+  "telemetry": {
+    "cached_tokens": 0.0,
+    "completion_tokens": 0.0,
+    "cost_usd": 0.0,
+    "errors": 0.0,
+    "llm_calls": 0.0,
+    "prompt_tokens": 0.0,
+    "repairs": 0.0,
+    "tool_calls": 0.0
+  },
+  "total": {
+    "passed": 15,
+    "total": 100
+  },
+  "wall_seconds": 602.2
+}

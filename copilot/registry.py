@@ -39,7 +39,7 @@ class Executed:
         """
         if isinstance(self.result, dict) and self.result.get("error"):
             return True
-        return self.result == [] or self.result is None and self.error is None
+        return self.result == [] or (self.result is None and self.error is None)
 
 
 @dataclass

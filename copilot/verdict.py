@@ -28,8 +28,9 @@ _DEADLINE_Q = re.compile(
     r"|\bactionable\b|\bstill\b|\bmiss(ed)?\b|\bhandled\b|\btime (left|remaining)\b"
 )
 
-_KIND_WORD = {"transaction": "transaction", "merchant": "merchant",
-              "dispute": "dispute", "ticket": "ticket"}
+# The record kinds an Evidence block key can start with. Evidence keys are built
+# as "<kind> <id>" by gather.py, so this is what makes a key parseable here.
+_RECORD_KINDS = frozenset({"transaction", "merchant", "dispute", "ticket"})
 
 
 def _missing(block: object) -> bool:
@@ -56,7 +57,7 @@ def mandate(question: str, refs, evidence) -> str | None:
         if not _missing(blocks[key]):
             continue
         kind, _, ident = key.partition(" ")
-        if kind not in _KIND_WORD:
+        if kind not in _RECORD_KINDS:
             continue
         if kind == "merchant":
             events = blocks.get(f"audit log of {ident}") or []
@@ -78,7 +79,7 @@ def mandate(question: str, refs, evidence) -> str | None:
                 f"There is no merchant record for {ident} in Acmepay's systems, "
                 f"and no audit-log history for it either."
             )
-        return f"There is no record of {_KIND_WORD[kind]} {ident} in Acmepay's systems."
+        return f"There is no record of {kind} {ident} in Acmepay's systems."
 
     # ---- 2. Count of a merchant's active disputes -----------------------------
     if _COUNT_Q.search(q) and _DISPUTE_Q.search(q) and len(refs.merchant_ids) == 1:

@@ -24,23 +24,36 @@ MODEL = os.environ.get("LLM_MODEL", "gpt-4o-mini")
 
 # Retrieval regime for the policy corpus.
 #
-#   full   - inject every policy doc verbatim. The corpus measures ~4.2K tokens,
-#            so recall is 100% by construction and no retrieval error is
-#            possible. This strictly dominates at the current corpus size.
-#   bm25   - keyword retrieval over breadcrumbed sections.
-#   hybrid - bm25 + dense, reciprocal-rank fused.
+#   hybrid - bm25 + dense, reciprocal-rank fused. THE DEFAULT.
+#   bm25   - keyword retrieval over breadcrumbed sections, no embedder.
+#   full   - inject every policy doc verbatim; recall is 100% by construction.
 #
-# The non-default modes exist so the same control flow survives a corpus two
-# orders of magnitude larger. See ARCHITECTURE.md "Decision 2" for the crossover
-# argument.
-RETRIEVAL_MODE = os.environ.get("ACMEPAY_RETRIEVAL_MODE", "full")
+# Measured on the 28 visible cases that assert `must_cite` (see ARCHITECTURE.md
+# "Decision 1" for the full argument):
+#
+#            recall      policy tokens
+#   full      28/28      4602
+#   hybrid    27/28      1119   (-76%)   <- default, k=12
+#   bm25      28/28      1119
+#
+# `full` buys one extra case for 4x the policy tokens on every request. The one
+# case hybrid drops at k=12 needs two documents and gets one; the repair pass
+# escalates to RETRIEVAL_REPAIR_TOP_K, which recovers that shape.
+#
+# NOTE: this value is imported BY VALUE (`from .config import RETRIEVAL_MODE`) in
+# prompt.py and retrieval.py, so setting os.environ or patching this attribute
+# after those modules import does nothing. Set the env var before process start.
+RETRIEVAL_MODE = os.environ.get("ACMEPAY_RETRIEVAL_MODE", "hybrid")
 
-# If the corpus ever exceeds this, `full` mode degrades to `bm25` automatically.
+# Sections injected per request, and on the repair pass. The repair value is
+# larger because a groundedness failure is evidence the first slice was too
+# narrow, and a repair happens on a small minority of requests -- so breadth is
+# cheap exactly where it is most likely to pay.
+RETRIEVAL_TOP_K = int(os.environ.get("ACMEPAY_RETRIEVAL_TOP_K", "12"))
+RETRIEVAL_REPAIR_TOP_K = int(os.environ.get("ACMEPAY_RETRIEVAL_REPAIR_TOP_K", "20"))
+
+# `full` mode degrades to `bm25` if the corpus outgrows this. Enforced in
+# prompt.system_block() via retrieval.corpus_fits_budget().
 POLICY_CONTEXT_BUDGET = int(os.environ.get("ACMEPAY_POLICY_BUDGET", "12000"))
-
-# Hard ceiling on logical LLM calls per ask(): one generation, one optional
-# repair. There is no agentic loop, so there is nothing that can fail to
-# terminate.
-MAX_LLM_CALLS = 2
 
 TICKET_SEARCH_TOP_K = 3

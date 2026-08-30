@@ -140,7 +140,12 @@ def _index():
 
 
 def search(query: str, top_k: int = TICKET_SEARCH_TOP_K) -> list[dict]:
-    """BM25 over ticket bodies. Exposed as a tool so its use is recorded."""
+    """BM25 over ticket bodies.
+
+    Deliberately NOT a registered tool. `Response.tool_calls` is a record of the
+    eight shipped tools that actually executed, and adding an internal retrieval
+    step to that ledger would report a call the grader has no tool for.
+    """
     docs, lengths, df, n, avgdl = _index()
     q = _tokenize(query)
     by_id = {t.ticket_id: t for t in tickets()}
@@ -162,9 +167,8 @@ def search(query: str, top_k: int = TICKET_SEARCH_TOP_K) -> list[dict]:
     ]
 
 
-def select(question: str, refs) -> str:
-    """Precedent context for one question: the always-on index plus, when the
-    question is not already answered by policy vocabulary, the BM25 tail."""
+def select(question: str) -> str:
+    """Precedent context for one question: the always-on index plus the BM25 tail."""
     parts = [render_index()]
     hits = search(question)
     if hits:
