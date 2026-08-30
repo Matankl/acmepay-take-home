@@ -4,6 +4,18 @@ __pycache__/
 venv/
 .venv/
 dist/
-grade_artifacts/
+# Eval artifacts: keep the evidence, drop the bulk. RESULTS.md and the sweep
+# JSON are what documented numbers are traceable to, and they are a few KB each.
+# The raw .log/.err captures are hundreds of KB and reconstructible by re-running.
+# A trailing-slash ignore would stop git descending at all, so negations below
+# would never be consulted -- hence `grade_artifacts/**`.
+grade_artifacts/**
+!grade_artifacts/**/
+!grade_artifacts/**/RESULTS.md
+!grade_artifacts/**/sweep-*.json
+!grade_artifacts/**/run.sh
+# Superseded by the re-run; its own filename records why it is not evidence.
+grade_artifacts/**/sweep-*INVALID*.json
 .idea/
 .cache/
+.claude/

@@ -98,11 +98,8 @@ def merchant(merchant_id: str, raw: dict) -> dict:
     out["days_since_signup"] = signup_age
     if signup_age < NEW_MERCHANT_DAYS:
         out["new_merchant_window"] = "inside"
-        out["new_merchant_window_ends"] = (
-            _d(raw["signup_date"]).toordinal() + NEW_MERCHANT_DAYS
-        )
         out["new_merchant_window_ends"] = date.fromordinal(
-            out["new_merchant_window_ends"]
+            _d(raw["signup_date"]).toordinal() + NEW_MERCHANT_DAYS
         ).isoformat()
     else:
         out["new_merchant_window"] = "graduated"

@@ -28,7 +28,7 @@ import json
 from collections import Counter
 from functools import lru_cache
 
-from .config import DATA, TODAY, TODAY_ISO
+from .config import DATA, TODAY_ISO
 from .enrich import MONITORING, SUSPENSION, days_from_today, risk_band
 from .text import pct, usd
 

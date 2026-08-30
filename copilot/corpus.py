@@ -63,7 +63,7 @@ def _split_doc(doc_id: str, text: str) -> list[Section]:
         buf.clear()
         if not body:
             return
-        crumbs = [c for c in stack[1:]]  # drop the H1 doc title; doc_id carries it
+        crumbs = list(stack[1:])  # drop the H1 doc title; doc_id carries it
         if faq_sub:
             crumbs = crumbs + [faq_sub]
         out.append(Section(doc_id, " > ".join(crumbs), body))

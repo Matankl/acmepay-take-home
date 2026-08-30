@@ -43,7 +43,11 @@ _KEYWORD_KIND = {
 # Digit-width -> kind, inferred from the shape of the data files themselves
 # (transactions T-99800..T-99998, merchants M-1001..M-1035, disputes D-501..D-515,
 # tickets TKT-201..TKT-255). Never from an eval assertion.
-_WIDTH_KIND = {5: "T", 4: "M", 3: None}
+#
+# 3 digits is deliberately absent: it is ambiguous between a dispute and a ticket,
+# so the keyword in the question is the only thing that can resolve it and the
+# lookup below falls back to it.
+_WIDTH_KIND = {5: "T", 4: "M"}
 
 _CORP_SUFFIX = {"co", "llc", "inc", "ltd", "corp", "company"}
 _NAME_STOP = _CORP_SUFFIX | {"and", "the", "of"}

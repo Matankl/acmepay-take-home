@@ -1,7 +1,11 @@
 """Citation attribution -- derived by code from the answer's own content.
-This file only helps for tracking, dosent inject data into the context
 
-Leaving that field to the model makes the weakest link in the system the longest chain in the grading.
+43 of the 100 visible cases carry a citation requirement and the multi-document
+ones require *both* sources, so leaving `cited_doc_ids` to the model would make
+the weakest link in the system the longest chain in the grading.
+
+This module is read-only with respect to the prompt. It never injects anything
+into context; it only attributes what the answer already said.
 
 So don't ask the model to remember to cite. Take the salient atoms the answer
 already contains -- amounts, percentages, endpoints, header names, status codes,
@@ -56,7 +60,23 @@ _MAX_NGRAM = 12
 _WEAK = {"0", "1", "2", "3", "4", "5", "100", "200"}
 
 
-def _normalised_docs() -> dict[str, str]:
+def _normalised_docs(ctx=None) -> dict[str, str]:
+    """doc_id -> flattened text to attribute against.
+
+    With a `ctx`, this is ONLY the sections that were actually injected for this
+    request. Under full injection the two were the same set, so searching the
+    whole corpus was sound. Under retrieval they diverge, and searching the corpus
+    would attribute a fact to a document the model never saw -- which makes
+    `cited_doc_ids` unfalsifiable rather than merely generous.
+
+    Section renders are used rather than raw file text because the render, label
+    and all, is literally what went into the prompt.
+    """
+    if ctx:
+        grouped: dict[str, list[str]] = {}
+        for s in ctx.sections.values():
+            grouped.setdefault(s.doc_id, []).append(s.render())
+        return {doc: _flatten("\n\n".join(parts)) for doc, parts in grouped.items()}
     return {doc: _flatten(text) for doc, text in doc_text().items()}
 
 
@@ -92,8 +112,8 @@ def _ngrams(text: str) -> list[str]:
     return out
 
 
-def attribute(text: str, key_facts: list[str]) -> set[str]:
-    docs = _normalised_docs()
+def attribute(text: str, key_facts: list[str], ctx=None) -> set[str]:
+    docs = _normalised_docs(ctx)
     found: set[str] = set()
     blob = ascii_punct(text or "")
 
@@ -113,30 +133,10 @@ def attribute(text: str, key_facts: list[str]) -> set[str]:
     return found
 
 
-def complete(draft, ledger) -> list[str]:
-    """Final `cited_doc_ids`: attributed documents + fetched record IDs.
-
-    Sorted, never a raw set -- an unsorted set reaching the response reorders
-    between runs under hash randomisation, which would make repeat runs measure
-    noise instead of behaviour.
-    """
-    valid = set(doc_ids())
-    cited: set[str] = set()
-
-    for claimed in draft.sources or []:
-        name = ascii_permissive(claimed)
-        if name in valid:
-            cited.add(name)
-
-    cited |= attribute(f"{draft.verdict}\n{draft.detail}", draft.key_facts)
-    cited |= set(ledger.record_ids())
-    return sorted(cited)
-
-
-def ascii_permissive(claimed: str) -> str:
+def _doc_basename(claimed: str) -> str:
     """Coerce a model-supplied source name to a bare document basename.
 
-    Document ids are normalised by lowercasing then stripping `.md` then
+    The grader normalises document ids by lowercasing, then stripping `.md`, then
     stripping whitespace -- in that order -- so a path or a trailing space never
     matches. Emit the bare basename and nothing else.
     """
@@ -144,3 +144,26 @@ def ascii_permissive(claimed: str) -> str:
     if not name.endswith(".md"):
         name = f"{name}.md"
     return name
+
+
+def complete(draft, ledger, ctx=None) -> list[str]:
+    """Final `cited_doc_ids`: attributed documents + fetched record IDs.
+
+    Sorted, never a raw set -- an unsorted set reaching the response reorders
+    between runs under hash randomisation, which would make repeat runs measure
+    noise instead of behaviour.
+    """
+    # Scoped to what was injected when a ctx is present, so a model-claimed
+    # source for an unretrieved document is dropped the same way an invented
+    # filename is.
+    valid = ctx.doc_ids() if ctx else set(doc_ids())
+    cited: set[str] = set()
+
+    for claimed in draft.sources or []:
+        name = _doc_basename(claimed)
+        if name in valid:
+            cited.add(name)
+
+    cited |= attribute(f"{draft.verdict}\n{draft.detail}", draft.key_facts, ctx=ctx)
+    cited |= set(ledger.record_ids())
+    return sorted(cited)

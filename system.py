@@ -71,8 +71,15 @@ class Response(BaseModel):
 # Orchestration
 # ---------------------------------------------------------------------------
 
+# These imports are BELOW load_dotenv() on purpose, and the E402 waivers are
+# load-bearing rather than cosmetic. copilot.config and copilot.generate read
+# LLM_MODEL, ACMEPAY_RETRIEVAL_MODE and ACMEPAY_RPM at *module import* time, so
+# hoisting this block above load_dotenv() would silently ignore .env and run the
+# whole system on defaults.
+
 from copilot import cite, entities, gather, generate, precedent, prompt, validate, verdict  # noqa: E402
 from copilot.registry import ToolLedger  # noqa: E402
+from copilot.retrieval import RetrievedContext  # noqa: E402
 from copilot.telemetry import Telemetry  # noqa: E402
 from copilot.text import normalise  # noqa: E402
 
@@ -147,16 +154,17 @@ def _compose_answer(draft, mandated: Optional[str]) -> str:
     return body
 
 
-def _project(draft, ledger, mandated) -> Response:
+def _project(draft, ledger, mandated, ctx=None) -> Response:
     """Draft -> Response. The only place the graded schema is constructed.
 
     Three fields the model never authors: `tool_calls` comes from the ledger of
     what actually executed, `cited_doc_ids` from attributing the answer's own
-    content back to the corpus, and `refused` from the disposition.
+    content back to the policy sections that were actually injected (`ctx`), and
+    `refused` from the disposition.
     """
     return Response(
         answer=_compose_answer(draft, mandated),
-        cited_doc_ids=cite.complete(draft, ledger),
+        cited_doc_ids=cite.complete(draft, ledger, ctx=ctx),
         tool_calls=[ToolCall(**tc) for tc in ledger.as_tool_calls()],
         refused=draft.refused,
         refusal_reason=_compose_reason(draft),
@@ -174,12 +182,16 @@ def _orchestrate(question: str, tel: Telemetry) -> Response:
     """
     refs = entities.extract(question)
     ledger = ToolLedger()
+    # Same lifetime and same pass-by-reference discipline as the ledger: one per
+    # request, accumulated across both passes, read at projection time to scope
+    # citations to what the model was actually shown.
+    ctx = RetrievedContext()
     evidence = gather.first_hop(question, refs, ledger)
     mandated = verdict.mandate(question, refs, evidence)
 
     system_text = prompt.system_block()
-    hits = precedent.select(question, refs)
-    user_text = prompt.user_block(question, evidence, hits, mandated)
+    hits = precedent.select(question)
+    user_text = prompt.user_block(question, evidence, hits, mandated, ctx=ctx)
 
     draft = generate.one_shot(system_text, user_text, telemetry=tel)
 
@@ -188,11 +200,12 @@ def _orchestrate(question: str, tel: Telemetry) -> Response:
     if problems:
         tel.repairs += 1
         evidence = gather.expand(f"{draft.verdict} {draft.detail}", ledger, evidence)
-        repair_text = prompt.repair_block(question, draft, problems, evidence, mandated)
+        repair_text = prompt.repair_block(question, draft, problems, evidence, mandated,
+                                          ctx=ctx)
         draft = generate.one_shot(system_text, repair_text, telemetry=tel)
 
     tel.tool_calls = len(ledger.rows)
-    return _project(draft, ledger, mandated)
+    return _project(draft, ledger, mandated, ctx=ctx)
 
 
 def _fallback(question: str, exc: Exception, tel: Telemetry) -> Response:
