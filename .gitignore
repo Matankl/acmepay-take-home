@@ -6,3 +6,4 @@ venv/
 dist/
 grade_artifacts/
 .idea/
+.cache/

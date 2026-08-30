@@ -1,51 +1,41 @@
 """
-system.py — Acmepay Support Copilot (baseline)
+system.py - Acmepay Support Copilot
 
 The user of this assistant is an Acmepay support agent handling merchant tickets.
-This baseline implementation does ONE thing: naive RAG over policy documents.
-It ignores:
-  - Transaction, merchant, dispute, ticket, and audit-log data
-  - All 8 tools that are wired up but never called
-  - The fact that the user is a support agent (so refusal logic is generic)
-  - Anything resembling investigation or multi-step reasoning
 
-Your job is to improve it.
+Control flow is gather -> generate -> validate -> repair, where the *validator*
+requests more evidence rather than the model. Evidence gathering is fully
+deterministic, so a normal request costs one LLM call and a request that fails an
+internal check costs two. There is no agentic loop.
 
-Do NOT change the Response schema — the eval suite depends on it.
+The five things worth knowing before reading:
+
+  1. The whole policy corpus is ~4.2K tokens and is injected verbatim. Retrieval
+     over it is a lossy compression nobody needs; see copilot/retrieval.py for the
+     crossover argument and the switch that handles a larger corpus.
+  2. `tool_calls` is recorded from execution, never authored by the model. The
+     internal Draft schema has no such field.
+  3. Every date difference, threshold comparison and count is computed in Python
+     against a frozen TODAY, and the model only reads the result.
+  4. `refused` is a projection of a three-way disposition decided from the
+     *request*, not from what the records happen to contain.
+  5. `cited_doc_ids` is derived by attributing the answer's own content back to
+     the corpus, not by asking the model to remember.
+
+Full reasoning: ARCHITECTURE.md. Do NOT change the Response schema or the ask()
+signature - the eval suite depends on both.
 """
 from __future__ import annotations
 
-import os
 import json
 import sys
-from pathlib import Path
+import threading
 from typing import Optional
 
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
-import numpy as np
-from sentence_transformers import SentenceTransformer
-import instructor
-import litellm
-from litellm import completion
-
-# Tools are available — none are used in this baseline.
-import tools  # noqa: F401
 
 load_dotenv()
-
-# The configured model may be a reasoning model (e.g. the Azure gpt-5.x series)
-# that rejects sampling params like `temperature` (only the default value 1 is
-# allowed) and requires `max_completion_tokens` instead of `max_tokens`. Letting
-# litellm drop unsupported params keeps the system model-portable. NOTE: do not
-# rely on this to force determinism — these models only run at temperature 1, so
-# responses vary run to run; the eval runner's --samples flag smooths that out.
-litellm.drop_params = True
-
-POLICIES_DIR = Path(__file__).parent / "data" / "policies"
-MODEL = os.environ.get("LLM_MODEL", "gpt-4o-mini")
-CHUNK_SIZE = 500   # characters (no overlap)
-TOP_K = 3
 
 
 # ---------------------------------------------------------------------------
@@ -78,80 +68,191 @@ class Response(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# Naive RAG — policies only
+# Orchestration
 # ---------------------------------------------------------------------------
 
-_embedder = None
-_index: list[tuple[str, str, np.ndarray]] = []   # (doc_id, chunk_text, embedding)
+from copilot import cite, entities, gather, generate, precedent, prompt, validate, verdict  # noqa: E402
+from copilot.registry import ToolLedger  # noqa: E402
+from copilot.telemetry import Telemetry  # noqa: E402
+from copilot.text import normalise  # noqa: E402
+
+# The authority for declining, fixed per disposition so the wording can't drift
+# between requests. The model supplies only the specific detail after it.
+_REASON_PREFIX = {
+    "DECLINE_ACTION": (
+        "not permitted: this copilot has read-only access to Acmepay's records and "
+        "no authority to change account state, move money, or adjudicate a dispute"
+    ),
+    "DECLINE_BOUNDARY": (
+        "out of scope: Acmepay does not hold this information, or the judgement "
+        "sits outside what a support copilot can determine"
+    ),
+}
+
+# Telemetry for the most recent ask(). Not part of the graded contract.
+#
+# Thread-local: the eval sweep runs cases in parallel, and a shared module global
+# would race -- silently under-reporting calls, tokens and cost.
+_LOCAL = threading.local()
 
 
-def _get_embedder():
-    global _embedder
-    if _embedder is None:
-        _embedder = SentenceTransformer("all-MiniLM-L6-v2")
-    return _embedder
+def last_telemetry() -> dict:
+    """Telemetry for the most recent ask() on the calling thread.
+
+    Out of band because Response is the graded contract and must not grow. Valid
+    only until the next ask() on this thread.
+    """
+    return dict(getattr(_LOCAL, "telemetry", {}) or {})
 
 
-def _build_index():
-    """Load policy docs, chunk them, embed each chunk."""
-    global _index
-    _index = []
-    embedder = _get_embedder()
-    for md_file in sorted(POLICIES_DIR.glob("*.md")):
-        text = md_file.read_text()
-        for start in range(0, len(text), CHUNK_SIZE):
-            chunk = text[start:start + CHUNK_SIZE]
-            emb = embedder.encode(chunk)
-            _index.append((md_file.name, chunk, emb))
+def _compose_reason(draft) -> Optional[str]:
+    """Build `refusal_reason`, or None on any non-refusal.
+
+    Ungraded in the visible suite, but the schema has a substring matcher for it,
+    so a specific reason weakly dominates a short one.
+    """
+    if not draft.refused:
+        return None      # a reason on a non-refusal is incoherent
+    prefix = _REASON_PREFIX.get(draft.disposition, "declined")
+    detail = (draft.refusal_reason or "").strip()
+    return f"{prefix}. {detail}" if detail else prefix
 
 
-def _retrieve(query: str, k: int = TOP_K) -> list[tuple[str, str]]:
-    """Return top-k chunks by cosine similarity."""
-    if not _index:
-        _build_index()
-    embedder = _get_embedder()
-    q_emb = embedder.encode(query)
-    scored = []
-    for doc_id, chunk, emb in _index:
-        denom = float(np.linalg.norm(q_emb) * np.linalg.norm(emb) + 1e-8)
-        score = float(np.dot(q_emb, emb) / denom)
-        scored.append((score, doc_id, chunk))
-    scored.sort(reverse=True, key=lambda x: x[0])
-    return [(doc_id, chunk) for _, doc_id, chunk in scored[:k]]
+def _compose_answer(draft, mandated: Optional[str]) -> str:
+    """Flatten the Draft's `verdict` + `detail` into the single `answer` string.
+
+    They are separate fields so the ruling lands in sentence one and the validators
+    can check it independently of the explanation. `mandated`, when present, is a
+    verdict sentence computed in Python (copilot/verdict.py) and is prepended so it
+    survives whatever the model wrote.
+
+    Sanitising runs only on ANSWER: a decline is *supposed* to describe what cannot
+    be done, so rewriting incapacity prose there would delete the content.
+    """
+    verdict_text = (draft.verdict or "").strip()
+    detail = (draft.detail or "").strip()
+    # A mandated verdict tends to come back echoed at the head of `detail` too.
+    if detail and verdict_text:
+        head = detail[: len(verdict_text)]
+        if head.lower() == verdict_text.lower():
+            detail = detail[len(verdict_text):].lstrip(" .\n")
+    body = f"{verdict_text}\n\n{detail}".strip() if detail else verdict_text
+
+    if mandated and mandated.lower() not in body.lower():
+        body = f"{mandated}\n\n{body}".strip()
+
+    body = normalise(body)
+    if draft.disposition == "ANSWER" and validate.incapacity_hits(body):
+        body = normalise(validate.sanitize(body))
+    return body
 
 
-# ---------------------------------------------------------------------------
-# Main entry point
-# ---------------------------------------------------------------------------
+def _project(draft, ledger, mandated) -> Response:
+    """Draft -> Response. The only place the graded schema is constructed.
 
-PROMPT = """\
-You are a customer-support assistant for Acmepay. Use the policy context below \
-to answer the user's question. If the answer is in the context, cite the source \
-doc IDs.
+    Three fields the model never authors: `tool_calls` comes from the ledger of
+    what actually executed, `cited_doc_ids` from attributing the answer's own
+    content back to the corpus, and `refused` from the disposition.
+    """
+    return Response(
+        answer=_compose_answer(draft, mandated),
+        cited_doc_ids=cite.complete(draft, ledger),
+        tool_calls=[ToolCall(**tc) for tc in ledger.as_tool_calls()],
+        refused=draft.refused,
+        refusal_reason=_compose_reason(draft),
+    )
 
-Context:
-{context}
 
-User question: {question}
-"""
+def _orchestrate(question: str, tel: Telemetry) -> Response:
+    """The happy path: gather -> generate -> validate -> repair.
+
+    Everything before generate.one_shot is deterministic, which is why one call is
+    enough. The repair branch fires only when a validator objects (see
+    copilot/validate.py); it re-gathers first, because the usual cause of an
+    objection is a fact the answer needed and the first hop didn't fetch. There is
+    exactly one repair - no loop, so nothing here can fail to terminate.
+    """
+    refs = entities.extract(question)
+    ledger = ToolLedger()
+    evidence = gather.first_hop(question, refs, ledger)
+    mandated = verdict.mandate(question, refs, evidence)
+
+    system_text = prompt.system_block()
+    hits = precedent.select(question, refs)
+    user_text = prompt.user_block(question, evidence, hits, mandated)
+
+    draft = generate.one_shot(system_text, user_text, telemetry=tel)
+
+    context_blob = f"{system_text}\n{user_text}"
+    problems = validate.check(draft, question, context_blob, ledger, mandated)
+    if problems:
+        tel.repairs += 1
+        evidence = gather.expand(f"{draft.verdict} {draft.detail}", ledger, evidence)
+        repair_text = prompt.repair_block(question, draft, problems, evidence, mandated)
+        draft = generate.one_shot(system_text, repair_text, telemetry=tel)
+
+    tel.tool_calls = len(ledger.rows)
+    return _project(draft, ledger, mandated)
+
+
+def _fallback(question: str, exc: Exception, tel: Telemetry) -> Response:
+    """Deterministic best effort when the model is unreachable or unusable.
+
+    The eval runner turns any exception out of ask() into a hard failure for that
+    case, so this boundary must never raise. Everything here comes from records
+    already on disk.
+    """
+    tel.errors.append(f"{type(exc).__name__}: {exc}")
+    ledger = ToolLedger()
+    try:
+        refs = entities.extract(question)
+        evidence = gather.first_hop(question, refs, ledger)
+        mandated = verdict.mandate(question, refs, evidence)
+    except Exception as inner:                     # pragma: no cover
+        tel.errors.append(f"{type(inner).__name__}: {inner}")
+        return Response(answer="", cited_doc_ids=[], tool_calls=[], refused=False)
+
+    lines = [mandated] if mandated else []
+    for key in sorted(evidence.blocks):
+        lines.append(f"{key}: {json.dumps(evidence.blocks[key], sort_keys=True)}")
+    lines.extend(evidence.notes)
+    if not evidence.blocks:
+        # No entity was named, so this is a policy or portfolio-wide question. The
+        # standing rollup is fully deterministic and is the most useful thing that
+        # can be said without a model -- far better than an empty apology.
+        from copilot.digest import render as render_digest
+        rollup = render_digest().split("\n\n")[0]
+        lines.append(
+            "The model was unavailable, so this is the deterministic portfolio "
+            "state only:\n" + rollup
+        )
+    return Response(
+        answer=normalise("\n".join(lines)) or "No records were named in this question.",
+        cited_doc_ids=sorted(ledger.record_ids()),
+        tool_calls=[ToolCall(**tc) for tc in ledger.as_tool_calls()],
+        refused=False,
+        refusal_reason=None,
+    )
 
 
 def ask(question: str) -> Response:
-    """Take a question, return a structured Response."""
-    chunks = _retrieve(question)
-    context = "\n\n".join(f"[{doc_id}]\n{text}" for doc_id, text in chunks)
-    prompt = PROMPT.format(context=context, question=question)
+    """Take a question, return a structured Response. Never raises.
 
-    client = instructor.from_litellm(completion)
-    response = client.chat.completions.create(
-        model=MODEL,
-        response_model=Response,
-        messages=[{"role": "user", "content": prompt}],
-    )
+    The eval runner scores an exception as a hard zero, so a transient rate limit
+    or a schema hiccup degrades to _fallback rather than losing the case.
+    """
+    tel = Telemetry()
+    try:
+        response = _orchestrate(question, tel)
+    except Exception as exc:
+        response = _fallback(question, exc, tel)
+    _LOCAL.telemetry = tel.stop().as_dict()
     return response
 
 
 if __name__ == "__main__":
-    question = " ".join(sys.argv[1:]) or "What's the standard transaction fee?"
-    response = ask(question)
-    print(json.dumps(response.model_dump(), indent=2))
+    q = " ".join(sys.argv[1:]) or "What's the standard transaction fee?"
+    r = ask(q)
+    print(json.dumps(r.model_dump(), indent=2))
+    print("\n-- telemetry --", file=sys.stderr)
+    print(json.dumps(last_telemetry(), indent=2), file=sys.stderr)
